@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CountDown JS</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<h1>
+		Install
+	</h1>
+	<pre>
+		&lt;script src="libs/jquery-3.1.0.min.js"&gt;&lt;/script&gt;
+		&lt;script src="libs/moment.min.js"&gt;&lt;/script&gt;
+		&lt;script src="libs/jquery.countdown.min.js"&gt;&lt;/script&gt;
+		&lt;script src="src/countdown.js"&gt;&lt;/script&gt;
+	</pre>
+	<h1>CountDown JS Sample</h1>
+
+	<p>Bacsic countdown (30 minutes): <span id="basicClock"></span></p>
+	<pre>
+		$('#basicClock').startCountDown({
+			units: {
+				minutes: 30
+			}
+		})
+	</pre>
+	<h1>CountDown Custom Clock</h1>
+	<h2>Defaut Options</h2>
+	<pre>{
+            units : {
+                years       : 0, // Year count
+                quarters    : 0, // Quarters count
+                months      : 0, // Months count
+                weeks       : 0, // Week count
+                days        : 0, // Day Count 
+                hours       : 0, // hour Count
+                minutes     : 0, // minutes Count
+                seconds     : 0, // seconds Count
+                milliseconds: 0  // millisecond Count
+            },
+            format              : null, // time Format 
+            secondFormat        : null, 
+            secondFormatPoint   : 1, // Apply second format when totalSecond greater than point
+            minuteFormat        : null,
+            minuteFormatPoint   : 1, // Apply minute format when totalMinutes greater than point
+            hourFormat          : null,
+            hourFormatPoint     : 1, // Apply hour format when totalHours greater than point
+            dayFormat           : null,
+            dayFormatPoint      : 1, // Apply day format when totalDays greater than point
+            weekFormat          : null,
+            weekFormatPoint     : 1, // Apply week format when weeks greater than point
+            monthFormat         : null,
+            monthFormatPoint    : 1, // Apply month format when months greater than point
+            yearFormat          : null,
+            yearFormatPoint     : 1, // Apply year format when years greater than point
+            finishText          : 'Finish!', // Display when countDown is Finished
+            precision           : 1000, //The update rate in milliseconds
+            onUpdated           : function(){}, // Updated callback
+            onFinished          : function(){} // Finished callback
+        }
+	</pre>
+	<p>Countdown with custom format: <span id="customClock1"></span></p>
+	<pre>
+		//Custom format
+			$('#customClock1').startCountDown({
+				units: {
+					hours: 1,
+					minutes: 20,
+					seconds: 45
+				},
+				format: "%-H tiếng %-M phút %-S giây"
+			})
+	</pre>
+	<p>Countdown with custom second, minute: <span id="customClock2"></span></p>
+	<pre>
+		//Custom format 2
+			$('#customClock2').startCountDown({
+				units: {
+					minutes: 1,
+					seconds: 5
+				},
+				secondFormat: '%S giây',
+				minuteFormat: '%M phút '
+			})
+	</pre>
+	<p>Countdown with custom second, minute at special point (> 30s): <span id="customClock3"></span></p> 
+	<pre>
+		
+			//Custom format 3
+			$('#customClock3').startCountDown({
+				units: {
+					seconds: 40
+				},
+				secondFormat: '%S giây',
+				secondFormatPoint: 30
+			})
+	</pre>
+	<p>Countdown with custom finish Text (Default: "Finish!"): <span id="customClock4"></span></p>
+	<pre>
+		//Custom format 4
+			$('#customClock4').startCountDown({
+				units: {
+					seconds: 5
+				},
+				finishText: "Game Over!!!"
+			})
+	</pre>
+	<p>Countdown with custom html: 
+		<span id="customClock5">
+			<script type="text/template" data-time>
+				<span style="color:red">%H</span>:
+				<span style="color:green">%M</span>:
+				<span style="color:blue">%S</span>
+			</script>
+			<script type="text/template" data-day>
+				<strong>%-d day%!d </strong>
+			</script>
+			<script type="text/template" data-week="3">
+				<span style="font-size:30px">%-w week%!w </span>
+			</script>
+			<script type="text/template" data-finish-text>
+				<h1>Custom Finish Text</h1>
+			</script>
+		</span>
+	</p>
+	<pre>
+		&lt;span id="customClock5"&gt;
+			&lt;script type="text/template" data-time&gt;
+				&lt;span style="color:red"&gt;%H&lt;/span&gt;:
+				&lt;span style="color:green"&gt;%M&lt;/span&gt;:
+				&lt;span style="color:blue"&gt;%S&lt;/span&gt;
+			&lt;/script&gt;
+			&lt;script type="text/template" data-day&gt;
+				&lt;strong&gt;%-d day%!d &lt;/strong&gt;
+			&lt;/script&gt;
+			&lt;script type="text/template" data-week="3"&gt;
+				&lt;span style="font-size:30px"&gt;%-w week%!w &lt;/span&gt;
+			&lt;/script&gt;
+			&lt;script type="text/template" data-finish-text&gt;
+				&lt;h1&gt;Custom Finish Text&lt;/h1&gt;
+			&lt;/script&gt;
+		&lt;/span&gt;
+			$('#customClock5').startCountDown({
+				units : {
+					years: 2,
+					weeks: 2,
+					minutes: 30
+				}
+			});
+		
+	</pre>
+	<h1>Formater</h1>
+		<table class="pure-table pure-table-horizontal">
+		  <thead>
+		    <tr>
+		      <th>Directive</th>
+		      <th>Blank-padded</th>
+		      <th>Description</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td><code>%Y</code></td>
+		      <td><code>%-Y</code></td>
+		      <td>Years left *</td>
+		    </tr>
+		    <tr>
+		      <td><code>%m</code></td>
+		      <td><code>%-m</code></td>
+		      <td>Monts left *</td>
+		    </tr>
+		    <tr>
+		      <td><code>%n</code></td>
+		      <td><code>%-n</code></td>
+		      <td>Days left until the next complete month *</td>
+		    </tr>
+		    <tr>
+		      <td><code>%w</code></td>
+		      <td><code>%-w</code></td>
+		      <td>Weeks left</td>
+		    </tr>
+		    <tr>
+		      <td><code>%W</code></td>
+		      <td><code>%-W</code></td>
+		      <td>Weeks left until the next complete month *</td>
+		    </tr>
+		    <tr>
+		      <td><code>%d</code></td>
+		      <td><code>%-d</code></td>
+		      <td>Days left (taking away weeks)</td>
+		    </tr>
+		    <tr>
+		      <td><code>%H</code></td>
+		      <td><code>%-H</code></td>
+		      <td>Hours left</td>
+		    </tr>
+		    <tr>
+		      <td><code>%M</code></td>
+		      <td><code>%-M</code></td>
+		      <td>Minutes left</td>
+		    </tr>
+		    <tr>
+		      <td><code>%S</code></td>
+		      <td><code>%-S</code></td>
+		      <td>Seconds left</td>
+		    </tr>
+		    <tr>
+		      <td><code>%D</code></td>
+		      <td><code>%-D</code></td>
+		      <td>Total count of days till the end</td>
+		    </tr>
+		    <tr>
+		      <td><code>%I</code></td>
+		      <td><code>%-I</code></td>
+		      <td>Total count of hours thill the end</td>
+		    </tr>
+		    <tr>
+		      <td><code>%N</code></td>
+		      <td><code>%-N</code></td>
+		      <td>Total count of minutes till the end</td>
+		    </tr>
+		    <tr>
+		      <td><code>%T</code></td>
+		      <td><code>%-T</code></td>
+		      <td>Total count of seconds till the end</td>
+		    </tr>
+		  </tbody>
+		</table>
+		<table class="pure-table pure-table-horizontal">
+		  <thead>
+		    <tr>
+		      <th>Modifier</th>
+		      <th>Description</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td><code>-</code></td>
+		      <td>Blank padding</td>
+		    </tr>
+		    <tr>
+		      <td><code>!</code></td>
+		      <td>Pluralization plugin</td>
+		    </tr>
+		  </tbody>
+		</table>
+	<h1>Pluralization</h1>
+	<table class="pure-table pure-table-horizontal">
+	  <thead>
+	    <tr>
+	      <th>Directive</th>
+	      <th>Description</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><code>%!H</code></td>
+	      <td>Return <strong>s</strong> when the hour is different than 1</td>
+	    </tr>
+	    <tr>
+	      <td><code>%!S:plural;</code></td>
+	      <td>Return <strong>plural</strong> when seconds if different than 1</td>
+	    </tr>
+	    <tr>
+	      <td><code>%!d:singular,plural;</code></td>
+	      <td>Return <strong>singular</strong> when day is 1 and <strong>plural</strong> otherwise</td>
+	    </tr>
+	  </tbody>
+	</table>
+	<h2>Example</h2>
+	<pre>
+		event.strftime('%-D day%!D %H:%M:%S');
+		// => 1 day 23:45:56 (or) 2 days 23:45:56
+
+		// Now in german
+		event.strftime('%-D tag%!D:e; %H:%M:%S');
+		// => 1 tag 23:45:56 (or) 2 tage 23:45:56
+		event.strftime('%S %!S:sekunde,sekunden;');
+		// => 01 sekunde (or) 02 sekunden
+	</pre>
+	<h1>Events handle</h1>
+	<p>Say hello if countdown to 10s and alert when finish: <span id="customClock6"></span></p>
+	<button id="eventBtn1">Start countDown</button><span id="eventStatus"></span>
+	<pre>
+		$('#customClock6').startCountDown({
+			units : {
+				seconds: 15
+			},
+			onUpdated: function(event){
+				if(event.offset.totalSeconds <= 10){
+					$('#eventStatus').text('Hello')
+				}else{
+					$('#eventStatus').text('Updating...')
+				}
+			},
+			onFinished: function(event){
+				alert("finish countDown");
+			}
+		});
+	</pre>
+	<h1>Event Object</h1>
+	<pre class="highlight"><code><span class="p">{</span>
+	    <span class="nl">type</span><span class="p">:</span>           <span class="s1">'{String} The namespaced event type {update,finish,stop}.countdown'</span><span class="p">,</span>
+	    <span class="nx">strftime</span><span class="err">:</span>       <span class="s1">'{Function} The formatter function'</span><span class="p">,</span>
+	    <span class="nx">finalDate</span><span class="err">:</span>      <span class="s1">'{Date} The parsed final date native object'</span><span class="p">,</span>
+	    <span class="nx">elapsed</span><span class="err">:</span>        <span class="s1">'{bool} Passed away the final date?'</span><span class="p">,</span>
+	    <span class="nx">offset</span><span class="err">:</span> <span class="p">{</span>
+	        <span class="nl">seconds</span>     <span class="p">:</span> <span class="s1">'{int} Seconds left for the next minute'</span><span class="p">,</span>
+	        <span class="nx">minutes</span>     <span class="err">:</span> <span class="s1">'{int} Minutes left for the next hour'</span><span class="p">,</span>
+	        <span class="nx">hours</span>       <span class="err">:</span> <span class="s1">'{int} Hours left until next day'</span><span class="p">,</span>
+	        <span class="nx">days</span>        <span class="err">:</span> <span class="s1">'{int} Days left until next week'</span><span class="p">,</span>
+	        <span class="nx">daysToWeek</span>  <span class="err">:</span> <span class="s1">'{int} Days left until next week'</span><span class="p">,</span>
+	        <span class="nx">daysToMonth</span> <span class="err">:</span> <span class="s1">'{int} Days left until next month'</span><span class="p">,</span>
+	        <span class="nx">weeks</span>       <span class="err">:</span> <span class="s1">'{int} Weeks left until the final date'</span><span class="p">,</span>
+	        <span class="nx">weeksToMonth</span><span class="err">:</span> <span class="s1">'{int} Weeks left until the next month'</span><span class="p">,</span>
+	        <span class="nx">months</span>      <span class="err">:</span> <span class="s1">'{int} Months left until final date'</span><span class="p">,</span>
+	        <span class="nx">years</span>       <span class="err">:</span> <span class="s1">'{int} Years left until final date'</span><span class="p">,</span>
+	        <span class="nx">totalDays</span>   <span class="err">:</span> <span class="s1">'{int} Total amount of days left until final date'</span><span class="p">,</span>
+	        <span class="nx">totalHours</span>  <span class="err">:</span> <span class="s1">'{int} Total amount of hours left until final date'</span><span class="p">,</span>
+	        <span class="nx">totalMinutes</span><span class="err">:</span> <span class="s1">'{int} Total amount of minutes left until final date'</span><span class="p">,</span>
+	        <span class="nx">totalSeconds</span><span class="err">:</span> <span class="s1">'{int} Total amount of seconds left until final date'</span>
+	    <span class="p">}</span>
+	<span class="p">}</span>
+	</code
+	</pre>
+	<!-- Libs --> 
+	<script src="libs/jquery-3.1.0.min.js"></script>
+	<script src="libs/moment.min.js"></script>
+	<script src="libs/jquery.countdown.min.js"></script>
+	<script src="src/countdown.js"></script>
+	<script>
+		$(document).ready(function(){
+			//Bacsic Countdown
+			$('#basicClock').startCountDown({
+				units: {
+					minutes: 30
+				}
+			})
+			//Custom format
+			$('#customClock1').startCountDown({
+				units: {
+					hours: 1,
+					minutes: 20,
+					seconds: 45
+				},
+				format: "%-H tiếng %-M phút %-S giây"
+			})
+			//Custom format 2
+			$('#customClock2').startCountDown({
+				units: {
+					minutes: 1,
+					seconds: 5
+				},
+				secondFormat: '%S giây',
+				minuteFormat: '%M phút '
+			})
+			//Custom format 3
+			$('#customClock3').startCountDown({
+				units: {
+					seconds: 40
+				},
+				secondFormat: '%S giây',
+				secondFormatPoint: 30
+			})
+			//Custom format 4
+			$('#customClock4').startCountDown({
+				units: {
+					seconds: 5
+				},
+				finishText: "Game Over!!!"
+			})
+			//Custom format 5
+			$('#customClock5').startCountDown({
+				units : {
+					years: 2,
+					weeks: 2,
+					minutes: 30
+				}
+			});
+			//Custom format 6
+			$('#eventBtn1').click(function(){
+
+				$('#customClock6').startCountDown({
+					units : {
+						seconds: 15
+					},
+					onUpdated: function(event){
+						if(event.offset.totalSeconds <= 10){
+							$('#eventStatus').text('Hello')
+						}else{
+							$('#eventStatus').text('Updating...')
+						}
+					},
+					onFinished: function(event){
+						alert("finish countDown");
+					}
+				});
+			})
+		});
+	</script>
+</body>
+</html>
